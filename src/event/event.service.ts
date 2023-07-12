@@ -27,7 +27,7 @@ export class EventService {
   }
 
   async findOne(InfoId: string): Promise<EventDocument> {
-    const existingInfo = await this.EventModel.findById(InfoId).exec();
+    const existingInfo = await this.EventModel.findById(InfoId).populate({path:"players"}).exec();
     if (!existingInfo) {
       throw new NotFoundException(`Event #${InfoId} not found`);
     }
